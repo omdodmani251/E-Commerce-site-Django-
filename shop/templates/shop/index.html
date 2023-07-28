@@ -39,6 +39,12 @@
         bottom:0;
         }
 
+     .carousel-control-prev,
+          .carousel-control-next{
+          top: auto;
+bottom: auto;
+          }
+
         .carousel-indicators .active{
         background-color: blue;
         }
@@ -52,11 +58,13 @@
 {% load static %}
 <!--{{product.0.image}}-->
     <div class="container">
-        <div id="demo" class="carousel slide my-3" data-ride="carousel">
+        {% for product,range,nslides in allproduct%}
+        <h4 class="my-4">{{product.0.category}}</h4>
+        <div id="demo{{forloop.counter}}" class="carousel slide my-3" data-ride="carousel">
     <ul class="carousel-indicators">
-      <li data-target="#demo" data-slide-to="0" class="active"></li>
+      <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
         {% for i in range %}
-      <li data-target="#demo" data-slide-to="{{i}}" ></li>
+      <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}" ></li>
         {% endfor %}
     </ul>
 
@@ -98,14 +106,15 @@
 </div>
           </div>
 
-    <a class="carousel-control-prev " href="#demo" role="button" data-slide="prev">
+    <a class="carousel-control-prev " href="#demo{{forloop.counter}}" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="carousel-control-next" href="#demo" role="button" data-slide="next">
+      <a class="carousel-control-next" href="#demo{{forloop.counter}}" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
+        {% endfor %}
         </div>
 {% endblock %}
 

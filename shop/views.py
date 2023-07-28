@@ -6,10 +6,20 @@ from math import ceil
 
 # Create your views here.
 def index(request):
-    products = Product.objects.all()
+    products = Product.objects.values()
     n = len(products)
+    all_product=[]
     nslides = n // 4 + ceil((n / 4) - (n // 4))
     params = {'product': products, 'range': range(1,nslides), 'no_of_slides': nslides}
+    cats={item['category'] for item in products}
+    for cat in cats:
+        products=Product.objects.filter(category=cat)
+        n=len(products)
+        nslides = n // 4 + ceil((n / 4) - (n // 4))
+        all_product.append([products,range(1,nslides),nslides])
+
+    # all_product=[[products,range(1,nslides),nslides],[products,range(1,nslides),nslides]]
+    params={'allproduct': all_product}
     return render(request, 'shop/index.html',params)
 
 
