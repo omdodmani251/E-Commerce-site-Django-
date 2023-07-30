@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Product
+from .models import Product,Feedback
 from math import ceil
 
 
@@ -28,7 +28,19 @@ def about(request):
 
 
 def contact(request):
-    return render(request, 'shop/contact.html')
+    post=False
+    if request.method == 'POST':
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        phone=request.POST.get('phone')
+        desc=request.POST.get('desc')
+        obj=Feedback(name=name,email=email,phone=phone,desc=desc)
+        # print(name,email,phone,desc)
+        obj.save()
+        post=True
+        
+    params={'post':post}
+    return render(request, 'shop/contact.html',params)
 
 
 def tracker(request):

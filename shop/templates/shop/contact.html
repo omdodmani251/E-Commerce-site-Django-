@@ -1,3 +1,35 @@
 {% extends 'shop/basic.html' %}
 {%block title%} Shop : Contact {%endblock%}
-{%block body%} we are in contatc{%endblock%}
+{%block body%} 
+{% if post %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Success!</strong> Your Feedback has been submitted sucessfully
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{%endif%}
+
+<div class="container ">
+    <h4 class="my-4">Please fill the Feedback form given below</h4>
+    <form action="/shop/contact" method="post" >{% csrf_token %}
+    <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Name</label>
+  <input type="text" name='name' class="form-control" id="exampleFormControlInput1" placeholder="Enter Your Name">
+</div>
+    <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Email Address</label>
+  <input type="email" name='email' class="form-control" id="exampleFormControlInput1" placeholder="Enter Your Email Address">
+</div>
+    <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Phone Number</label>
+  <input type="tel" name='phone' class="form-control" id="exampleFormControlInput1" placeholder="Enter Your Phone Number" maxlength="10">
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">How can we help you?</label>
+  <textarea class= "form-control" name='desc' id="exampleFormControlTextarea1" rows="3" style="height:175px;"></textarea>
+</div>
+        <button type="submit" class="btn btn-success" >Submit</button>
+</form>
+
+</div>{%endblock%}
