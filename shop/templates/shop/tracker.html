@@ -1,3 +1,88 @@
 {% extends 'shop/basic.html' %}
-{%block title%} Shop : Tracker {%endblock%}
-{%block body%} We are in Tracker{%endblock%}
+{%block title%} Shop : Checkout {%endblock%}
+{%block body%} 
+<div class="container">
+	
+	<div class="my-4">
+		<h3>My Awesome Cart Track your Orders </h3>
+		<form id='trackerform'> {%csrf_token%}
+			<div class="form-row">
+			<div class="form-group col-md-6">
+      <label for="name">Order Id</label>
+      <input type="name" class="form-control" id="orderid" name="orderid" placeholder="Order Id">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name='email' placeholder="Email">
+    </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+   
+ </div>
+
+ <div class="my-4">
+   <h3>Your order status</h3>
+   
+   <ul class="list-group" id='items-list'>
+   	Enter the Order Id and Email for getting your order details
+   </ul>
+  
+</div>
+
+</div>
+
+{%endblock%}
+
+{%block js%}
+<script type="text/javascript">
+
+
+$('#trackerform').submit( function(event){
+$('#items-list').empty()
+
+var formdata={
+'orderid':$('input[name=orderid]').val(),
+'email':$('input[name=email]').val(),
+'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val()
+}
+
+
+$.ajax({
+url : '/shop/tracker',
+type: 'POST',
+data : formdata,
+encode : true
+}).done(function (data){
+
+	$('#orderid').val('');
+	$('#email').val('');
+	updates=JSON.parse(data);
+	if(updates.length>0){
+		let date;
+for(var i=0;i<updates.length;i++){
+	date=new Date(updates[i]['time']);
+
+$('#items-list').append(
+`<li class="list-group-item d-flex justify-content-between align-items-center">
+      ${updates[i]['text']}
+      <span class="badge badge-primary badge-pill">${date.toLocaleString('en-US', { dateStyle: 'long' })}</span>
+      </li>`
+	);
+};
+}
+else{
+mystr=`<li class="list-group-item d-flex justify-content-between align-items-center">
+     Sorry! You have wrong order id or email. Please check and Enter again  
+      </li>`
+      $('#items-list').append(mystr);
+}
+})
+event.preventDefault();
+
+})
+
+</script>
+
+ 
+{%endblock%}

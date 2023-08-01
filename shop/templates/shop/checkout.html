@@ -11,38 +11,45 @@
 
  <div class="my-4">
    <h3>Step 2 - Enter Address and Essential Details For Order</h3>
-   <form>
+   
+   <form action='/shop/checkout' method='post' > {% csrf_token%}
+    <!-- <form> -->
+      <input type="hidden" name="items_info" id="items_info">
     <div class="form-row">
      <div class="form-group col-md-6">
-      <label for="inputPassword4">Name</label>
-      <input type="name" class="form-control" id="inputPassword4" placeholder="Password">
+      <label for="name">Name</label>
+      <input type="name" class="form-control" id="name" name="name" placeholder="Name">
     </div>
     <div class="form-group col-md-6">
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name='email' placeholder="Email">
     </div>
     
   </div>
   <div class="form-group">
-    <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <label for="address1">Address</label>
+    <input type="text" class="form-control" id="address1" name='address1' placeholder="1234 Main St">
   </div>
   <div class="form-group">
-    <label for="inputAddress2">Address line 2</label>
-    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+    <label for="address2">Address line 2</label>
+    <input type="text" class="form-control" id="address2" name='address2' placeholder="Apartment, studio, or floor">
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone</label>
+    <input type="text" class="form-control" id="phone" name='phone' placeholder="8127349872">
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity" placeholder="Mumbai">
+      <label for="city">City</label>
+      <input type="text" class="form-control" id="city" name='city' placeholder="Mumbai">
     </div>
     <div class="form-group col-md-4">
-      <label for="inputState">State</label>
-      <input type="text" class="form-control" id="inputState" placeholder="Maharashtra">
+      <label for="state">State</label>
+      <input type="text" class="form-control" id="state" name='state' placeholder="Maharashtra">
     </div>
     <div class="form-group col-md-2">
-      <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
+      <label for="zip_code">Zip</label>
+      <input type="text" class="form-control" id="zip_code" name='zip_code'>
     </div>
   </div>
   <!-- <div class="form-group"> -->
@@ -77,7 +84,18 @@
       </li>`;
       $('#items-list').append(str);
     }
+    
+
   }
+$('#items_info').val(JSON.stringify(cart))
+console.log(document.getElementById('items_info').value)
   // document.getElementById('items').innerHTML=sum;
+{% if placed%}
+alert('Success! Your order has been placed with id : {{id}}');
+localStorage.clear();
+document.location='/shop'
+ {%endif%}
+
 </script>
+ 
 {%endblock%}

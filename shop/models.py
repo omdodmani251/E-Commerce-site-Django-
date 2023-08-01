@@ -25,3 +25,25 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.name
+
+class Order(models.Model):
+    ord_id=models.AutoField(primary_key=True)
+    items_info=models.CharField(max_length=5000)
+    name=models.CharField(max_length=50)
+    email=models.EmailField(max_length=100)
+    address1=models.CharField(max_length=100,default='')
+    address2=models.CharField(max_length=100,default='')
+    city=models.CharField(max_length=50)
+    state=models.CharField(max_length=50)
+    zip_code=models.CharField(max_length=20)
+    phone=models.CharField(max_length=10)
+
+
+class Order_tracker(models.Model):
+    track_id=models.AutoField(primary_key=True)
+    order_id=models.IntegerField()
+    track_desc=models.CharField(max_length=100)
+    timestamp=models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.order_id)+" "+self.track_desc[:12]
