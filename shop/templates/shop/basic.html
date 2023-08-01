@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,9 +10,9 @@
 
     <title>{% block title %}  {% endblock %}</title>
 
-      <style>{% block css %} {% endblock %}</style>
+    <style>{% block css %} {% endblock %}</style>
 
-      </head>
+</head>
 
 <body>
 
@@ -20,49 +20,90 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/shop">My Awesome Cart</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/shop">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/shop/about">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/shop/tracker">Tracker</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/shop/contact">Contact Us</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            <button type="button" class="btn btn-light mx-3" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
-sagittis lacus vel augue laoreet rutrum faucibus." data-html="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-</svg> Cart(<span id="items">0</span>)</button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/shop">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/shop/about">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/shop/tracker">Tracker</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/shop/contact">Contact Us</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <button type="button" class="btn btn-light mx-3" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+        sagittis lacus vel augue laoreet rutrum faucibus." data-html="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+      </svg> Cart(<span id="items">0</span>)</button>
 
 
-        </div>
-    </nav>
+  </div>
+</nav>
 
-    {%block body%} {%endblock%}
+{%block body%} {%endblock%}
 
- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
-    <script type="text/javascript">
-        $('#popcart').popover()
-        document.getElementById('popcart').setAttribute('data-content','<h6> cart details</h6> <a href="/shop/checkout"><button class="btn btn-primary checkout">Checkout</button></a> <button class="btn btn-primary clearcart" onclick="Clearcart">Clearcart</button>')
+<script type="text/javascript">
+    let cartp;
+    if(localStorage.getItem('cart')!=null){
+        cartp=JSON.parse(localStorage.getItem('cart'));
+        // console.log(cart);
+    }
+    else{
+        cartp={};
+    }
+    cartinfo(cartp);
+    
+            // cartinfo(cart);
+        // $('#popcart').popover()
 
-    </script>
+    $('.navbar-collapse').on('click','button', function (){
+        console.log('clicked');
+        let cart;
+        if(localStorage.getItem('cart')!=null){
+            cart=JSON.parse(localStorage.getItem('cart'));
+        // console.log(cart);
+        }
+        else{
+            cart={};
+        }
+        
+        cartinfo(cart);
+    });
+
+    function cartinfo(cart){
+
+        let s="<h6> Cart Details </h6>"
+        let index=1;
+        let total=0;
+        for(var item in cart){
+            total+=cart[item][0];
+            console.log('yes');
+            s+="<b>"+index+"</b> "+cart[item][1]+"- Qty : "+cart[item][0]+"<br>";
+            index+=1;
+        }
+        s+='<a href="/shop/checkout"><button class="btn btn-primary checkout">Checkout</button></a> <button class="btn btn-primary clearcart" onclick="Clearcart()">Clear Cart</button>'
+        document.getElementById('popcart').setAttribute('data-content',s);
+        document.getElementById('items').innerHTML=total;
+        $('#popcart').popover();
+    }
+
+</script>
 {%block js%} {%endblock%}
-  </body>
+</body>
 </html>

@@ -5,27 +5,15 @@
 	
 	<div class="my-4">
 		<h3>Step 1 - My Awesome Cart Express Checkout - Review Your Cart Items </h3>
-	<ul class="list-group">
-		<li class="list-group-item d-flex justify-content-between align-items-center">
-			Cras justo odio
-			<span class="badge badge-primary badge-pill">14</span>
-		</li>
-		<li class="list-group-item d-flex justify-content-between align-items-center">
-			Dapibus ac facilisis in
-			<span class="badge badge-primary badge-pill">2</span>
-		</li>
-		<li class="list-group-item d-flex justify-content-between align-items-center">
-			Morbi leo risus
-			<span class="badge badge-primary badge-pill">1</span>
-		</li>
-	</ul>
-</div>
+   <ul class="list-group" id='items-list'>
+   </ul>
+ </div>
 
-<div class="my-4">
-	<h3>Step 2 - Enter Address and Essential Details For Order</h3>
-	<form>
-  <div class="form-row">
-  	<div class="form-group col-md-6">
+ <div class="my-4">
+   <h3>Step 2 - Enter Address and Essential Details For Order</h3>
+   <form>
+    <div class="form-row">
+     <div class="form-group col-md-6">
       <label for="inputPassword4">Name</label>
       <input type="name" class="form-control" id="inputPassword4" placeholder="Password">
     </div>
@@ -50,18 +38,46 @@
     </div>
     <div class="form-group col-md-4">
       <label for="inputState">State</label>
-       <input type="text" class="form-control" id="inputState" placeholder="Maharashtra">
+      <input type="text" class="form-control" id="inputState" placeholder="Maharashtra">
     </div>
     <div class="form-group col-md-2">
       <label for="inputZip">Zip</label>
       <input type="text" class="form-control" id="inputZip">
     </div>
   </div>
-  <div class="form-group">
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+  <!-- <div class="form-group"> -->
+    <button type="submit" class="btn btn-primary">Place Order</button>
+  </form>
 </div>
 
 </div>
 
+{%endblock%}
+
+{%block js%}
+<script type="text/javascript">
+  // var sum=0;
+  if(localStorage.getItem('cart')==null){
+    cart={};
+  }
+  else{
+    cart=JSON.parse(localStorage.getItem('cart'));
+   sum=0;
+  }
+  if($.isEmptyObject(cart)){
+    let str=`<h5 class="mt-4">Currently you cart is Empty please enter some items in your cart<h5>`;
+    $('#items-list').append(str);
+  }
+  else{
+    for(let item in cart){
+      // sum+=cart[item][0];
+      let str=`<li class="list-group-item d-flex justify-content-between align-items-center">
+      ${cart[item][1]}
+      <span class="badge badge-primary badge-pill">${cart[item][0]}</span>
+      </li>`;
+      $('#items-list').append(str);
+    }
+  }
+  // document.getElementById('items').innerHTML=sum;
+</script>
 {%endblock%}
