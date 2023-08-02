@@ -6,7 +6,18 @@
 	<div class="my-4">
 		<h3>Step 1 - My Awesome Cart Express Checkout - Review Your Cart Items </h3>
    <ul class="list-group" id='items-list'>
+
    </ul>
+
+   <ul class="list-group " id='items-list'>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Total Price <b> Rs.<span id='total-price'></span> </b>
+      </li>
+    
+   </ul>
+ <!--   <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Total Price <b> Rs.<span id='total-price'></span><b></li>
+  </ol> -->
  </div>
 
  <div class="my-4">
@@ -64,6 +75,8 @@
 {%block js%}
 <script type="text/javascript">
   // var sum=0;
+  var totalprice=0;
+  // console.log(totalprice);
   if(localStorage.getItem('cart')==null){
     cart={};
   }
@@ -78,15 +91,24 @@
   else{
     for(let item in cart){
       // sum+=cart[item][0];
+      // console.log(cart[item][0])
+      let price=cart[item][2]*cart[item][0];
+      // console.log(price);
+      totalprice+=price;
+      console.log(totalprice);
       let str=`<li class="list-group-item d-flex justify-content-between align-items-center">
       ${cart[item][1]}
       <span class="badge badge-primary badge-pill">${cart[item][0]}</span>
       </li>`;
       $('#items-list').append(str);
     }
+
     
 
   }
+  // console.log(totalprice);
+  document.getElementById('total-price').innerHTML=totalprice;
+
 $('#items_info').val(JSON.stringify(cart))
 console.log(document.getElementById('items_info').value)
   // document.getElementById('items').innerHTML=sum;

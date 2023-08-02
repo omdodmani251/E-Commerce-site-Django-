@@ -83,6 +83,7 @@
                         <div class="card-body">
                           <h5 class="card-title" id="namepr{{i.id}}">{{i.prod_name}}</h5>
                           <p class="card-text">{{i.prod_desc}}</p>
+                          <h6 class="card-text"> Price <span id='pricepr{{i.id}}'>{{i.price}}</span></h6>
                           <span id='divpr{{i.id}}'class="divpr">
                           <button id="pr{{i.id}}"class="btn btn-primary cart">Add to Cart</button>
                           </span>
@@ -140,7 +141,8 @@
         else{
         let qty=1;
         let name = document.getElementById('name'+prid).innerHTML;
-        cart[prid]=[qty,name];
+        let price = document.getElementById('price'+prid).innerHTML;
+        cart[prid]=[qty,name,parseInt(price)];
         }
 
         updatecart(cart);
@@ -177,7 +179,7 @@
 <!--cart Updation-->
 
         function updatecart(cart){
-            
+            console.log(cart)
             let total = 0;
             for(var item in cart){
                 if(cart[item][0]!=0){

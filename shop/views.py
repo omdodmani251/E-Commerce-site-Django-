@@ -40,6 +40,7 @@ def contact(request):
         post = True
 
     params = {'post': post}
+    post=False
     return render(request, 'shop/contact.html', params)
 
 
@@ -57,7 +58,7 @@ def tracker(request):
                 update = []
                 for i in updates:
                     update.append({'text': i.track_desc, 'time': i.timestamp})
-                    response = json.dumps(update, default=str)
+                    response = json.dumps([update,order[0].items_info], default=str)
 
                 return HttpResponse(response)
             else:
