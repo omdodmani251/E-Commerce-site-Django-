@@ -29,6 +29,7 @@ class Feedback(models.Model):
 class Order(models.Model):
     ord_id=models.AutoField(primary_key=True)
     items_info=models.CharField(max_length=5000)
+    amount=models.IntegerField(default=0)
     name=models.CharField(max_length=50)
     email=models.EmailField(max_length=100)
     address1=models.CharField(max_length=100,default='')

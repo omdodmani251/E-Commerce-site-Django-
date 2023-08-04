@@ -9,7 +9,7 @@
 
    </ul>
 
-   <ul class="list-group " id='items-list'>
+   <ul class="list-group " id='items-list1'>
     <li class="list-group-item d-flex justify-content-between align-items-center">
       Total Price <b> Rs.<span id='total-price'></span> </b>
       </li>
@@ -26,6 +26,7 @@
    <form action='/shop/checkout' method='post' > {% csrf_token%}
     <!-- <form> -->
       <input type="hidden" name="items_info" id="items_info">
+       <input type="hidden" name="amount" id="amount">
     <div class="form-row">
      <div class="form-group col-md-6">
       <label for="name">Name</label>
@@ -117,6 +118,8 @@ alert('Success! Your order has been placed with id : {{id}}');
 localStorage.clear();
 document.location='/shop'
  {%endif%}
+
+$('#amount').val($('#total-price').html())
 
 </script>
  

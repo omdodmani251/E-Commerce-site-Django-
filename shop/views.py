@@ -85,6 +85,7 @@ def checkout(request):
     if request.method == 'POST':
         # print('yes',request.POST.get('items_info'))
         items_info = request.POST.get('items_info', '')
+        amount=request.POST.get('amount','')
         name = request.POST.get('name', '')
         email = request.POST.get('email', '')
         address1 = request.POST.get('address1', '')
@@ -94,9 +95,9 @@ def checkout(request):
         zip_code = request.POST.get('zip_code', '')
         phone = request.POST.get('phone', '')
         order = Order(items_info=items_info, name=name, email=email, address1=address1, address2=address2, city=city,
-                      state=state, zip_code=zip_code, phone=phone)
+                      state=state, zip_code=zip_code, phone=phone,amount=amount)
         order.save()
-        tracker = Order_tracker(order_id=order.ord_id, track_desc='Your has been placed')
-        tracker.save()
+        trackerobj = Order_tracker(order_id=order.ord_id, track_desc='Your has been placed')
+        trackerobj.save()
         return render(request, 'shop/checkout.html', {'placed': True, 'id': order.ord_id})
     return render(request, 'shop/checkout.html')
