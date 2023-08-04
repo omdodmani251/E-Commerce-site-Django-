@@ -8,5 +8,7 @@ urlpatterns = [
     path('search',views.search,name='Search'),
     path('contact',views.contact,name='ContactUs'),
     path('product/<int:myid>',views.productView,name='ProductView'),
-    path('checkout',views.checkout,name='Checkout')
+    path('checkout',views.checkout,name='Checkout'),
+    path('handlerequest',views.handlerequest,name='HandeleRequest'),
+    path('initialize',views.initialize,name='Initialize'),
 ]

@@ -75,24 +75,27 @@
 
 {%block js%}
 <script type="text/javascript">
-  // var sum=0;
+  
   var totalprice=0;
-  // console.log(totalprice);
+  //check localStorage for cart
   if(localStorage.getItem('cart')==null){
     cart={};
   }
+
   else{
     cart=JSON.parse(localStorage.getItem('cart'));
    sum=0;
   }
+
+  // Checck if cart is empty
   if($.isEmptyObject(cart)){
     let str=`<h5 class="mt-4">Currently you cart is Empty please enter some items in your cart<h5>`;
     $('#items-list').append(str);
   }
+
+  //Show cart Items in items-list
   else{
     for(let item in cart){
-      // sum+=cart[item][0];
-      // console.log(cart[item][0])
       let price=cart[item][2]*cart[item][0];
       // console.log(price);
       totalprice+=price;
@@ -107,19 +110,19 @@
     
 
   }
-  // console.log(totalprice);
+
   document.getElementById('total-price').innerHTML=totalprice;
 
-$('#items_info').val(JSON.stringify(cart))
-console.log(document.getElementById('items_info').value)
-  // document.getElementById('items').innerHTML=sum;
+$('#items_info').val(JSON.stringify(cart)) // items Json
+$('#amount').val($('#total-price').html()) //total amount
+
 {% if placed%}
 alert('Success! Your order has been placed with id : {{id}}');
 localStorage.clear();
 document.location='/shop'
  {%endif%}
 
-$('#amount').val($('#total-price').html())
+
 
 </script>
  

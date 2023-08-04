@@ -51,7 +51,7 @@
 
 $('#trackerform').submit( function(event){
 $('#items-list').empty()
-
+$('#order-list').empty()
 var formdata={
 'orderid':$('input[name=orderid]').val(),
 'email':$('input[name=email]').val(),
@@ -59,31 +59,36 @@ var formdata={
 }
 
 
-$.ajax({
+$.ajax({         // Post Request to the tracker.html
 url : '/shop/tracker',
 type: 'POST',
 data : formdata,
 encode : true
-}).done(function (data){
-
+}).done(function (data){  // Response returned from tracker.html for above post request
+  // $('items')
 	$('#orderid').val('');
 	$('#email').val('');
 	data=JSON.parse(data);
-  updates=data[0];
-	if(updates.length>0){
+  
+	if(data['status']=='success'){ // Checking Status
+    // console.log('SUccess')
+    updates=data['updates']
 		let date;
 for(var i=0;i<updates.length;i++){
 	date=new Date(updates[i]['time']);
 
-$('#items-list').append(
+ // Order Tracker Status
+$('#items-list').append(  
 `<li class="list-group-item d-flex justify-content-between align-items-center">
       ${updates[i]['text']}
       <span class="badge badge-primary badge-pill">${date.toLocaleString('en-US', { dateStyle: 'long' })}</span>
       </li>`
 	);
 };
-cart=JSON.parse(data[1]);
-for(let item in cart){
+
+//Order Items
+cart=JSON.parse(data['itemsJson']);
+for(let item in cart){         
       // sum+=cart[item][0];
       let str=`<li class="list-group-item d-flex justify-content-between align-items-center">
       ${cart[item][1]}
@@ -92,11 +97,26 @@ for(let item in cart){
       $('#order-list').append(str);
     }
 }
-else{
+
+//Empty Status
+else if(data['status']=='empty'){
+  // console.log('Inside Else')
 mystr=`<li class="list-group-item d-flex justify-content-between align-items-center">
-     Sorry! You have wrong order id or email. Please check and Enter again  
+     Sorry! Please Check the order id and Email you have entered 
       </li>`
       $('#items-list').append(mystr);
+      $('#order-list').append(mystr)
+}
+
+
+else{
+  console.log(data['status'])
+  console.log('Inside Else')
+mystr=`<li class="list-group-item d-flex justify-content-between align-items-center">
+    Please Enter Valid Order id and Email id
+      </li>`
+      $('#items-list').append(mystr);
+      $('#order-list').append(mystr)
 }
 })
 event.preventDefault();
